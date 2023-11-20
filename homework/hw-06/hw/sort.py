@@ -110,21 +110,25 @@ def working_in_directories(unsorted_path, sorted_path):
     known_files_extension_list = set()
     unknown_files_extension_list = set()
     files_by_category_lists = {
-        "images": [],
-        "documents": [],
-        "audio": [],
-        "video": [],
-        "archives": [],
+        'adobe': [],
+        'archives': [],
+        'audio': [],
+        'cad': [],
+        'documents': [],
+        'images': [],
+        'video': [],
         "unknown": []
     }        
 
     # Сreate directories for file types
     file_types = {
-        'images': {'jpg', 'jpeg', 'png', 'svg'},
-        'documents': {'doc', 'docx', 'txt', 'pdf', 'xlsx', 'pptx'},
-        'audio': {'mp3', 'ogg', 'wav', 'amr'},
-        'video': {'avi', 'mp4', 'mov', 'mkv'},
+        'adobe': {'psd', 'ai', 'eps', 'indd'},
         'archives': {'zip', 'gz', 'tar'},
+        'audio': {'mp3', 'ogg', 'wav', 'amr'},
+        'cad': {'cdw', 'frw,' 'dwg', 'dxf', 'sldprt', 'sldasm', 'stp', 'step'},
+        'documents': {'doc', 'docx', 'txt', 'pdf', 'xlsx', 'pptx'},
+        'images': {'jpg', 'jpeg', 'png', 'svg'},
+        'video': {'avi', 'mp4', 'mov', 'mkv'},
         'unknown': set()
     }
 
