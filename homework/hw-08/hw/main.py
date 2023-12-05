@@ -17,12 +17,14 @@ def get_birthdays_per_week(users):
         current_year = date.today().year
         new_birthday = datetime(current_year,
                                 user["birthday"].month,
-                                user["birthday"].day).date()
+                                user["birthday"].day
+                                ).date()
         # Check if birthday was before today
         if new_birthday < date.today():
             new_birthday = datetime(current_year + 1,
                                     user["birthday"].month,
-                                    user["birthday"].day).date()
+                                    user["birthday"].day
+                                    ).date()
 
         # Determine whether the birthday falls on this week
         if date.today() <= new_birthday <= date.today() + timedelta(6):
@@ -30,8 +32,8 @@ def get_birthdays_per_week(users):
             if new_birthday.weekday() in [5, 6]:  # Saturday or Sunday
                 birthdays_per_week["Monday"].append(user["name"])
             else:
-                birthdays_per_week[
-                    new_birthday.strftime("%A")].append(user["name"])
+                weekday = new_birthday.strftime("%A")
+                birthdays_per_week[weekday].append(user["name"])
 
     # Del empty keys
     a = {}
