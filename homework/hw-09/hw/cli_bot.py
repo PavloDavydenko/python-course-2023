@@ -17,14 +17,14 @@ contacts = {}
 @input_error
 def add_contact(name, phone):
     contacts[name] = phone
-    return f"Contact {name} added successfully."
+    return f'Contact "{name}" added successfully.'
 
 
 @input_error
 def change_contact(name, phone):
     if name in contacts:
         contacts[name] = phone
-        return f"Phone number for {name} changed successfully."
+        return f'Phone number for "{name}" changed successfully.'
     else:
         raise IndexError
 
@@ -32,7 +32,7 @@ def change_contact(name, phone):
 @input_error
 def show_phone(name):
     if name in contacts:
-        return f"The phone number for {name} is {contacts[name]}."
+        return f'The phone number for "{name}" is "{contacts[name]}".'
     else:
         raise IndexError
 
