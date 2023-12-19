@@ -56,35 +56,31 @@ def handle_command_hello():
     return "How can I help you?"
 
 
-def handle_command_add(parts):
-    if len(parts) == 2:
-        return add_contact(*parts[1].split())
+def handle_command_add(data):
+    if len(data) == 2:
+        return add_contact(*data)
     else:
         raise ValueError
 
 
-def handle_command_change(parts):
-    if len(parts) == 2:
-        return change_contact(*parts[1].split())
+def handle_command_change(data):
+    if len(data) == 2:
+        return change_contact(*data)
     else:
         raise ValueError
 
 
-def handle_command_phone(parts):
-    if len(parts) == 2:
-        return show_phone(parts[1])
+def handle_command_phone(data):
+    if len(data) == 1:
+        return show_phone(*data)
     else:
         raise ValueError
 
 
-def handle_command(command):
-    parts = command.split(" ", 1)
-    # print(parts)
-    action = parts[0].lower()
-    # print(action)
-    act_command = command.lower()
-
-    commands = {
+COMMANDS_DICT = {
+        "add": handle_command_add,
+        "change": handle_command_change,
+        "phone": handle_command_phone,
         "hello": handle_command_hello,
         "show all": show_all_contacts,
         "good bye": exit,
@@ -93,20 +89,24 @@ def handle_command(command):
         ".": exit,
     }
 
-    arg_commands = {
-        "add": handle_command_add,
-        "change": handle_command_change,
-        "phone": handle_command_phone,
-    }
 
-    if action in commands:
-        return commands[action]()
-    elif action in arg_commands:
-        return arg_commands[action](parts)
-    elif act_command in commands:
-        return commands[act_command]()
-    else:
+def handle_command(user_input):
+    command = ''
+    data = ''
+
+    for key in COMMANDS_DICT:
+        if user_input.strip().lower().startswith(key):
+            command = key
+            data = user_input[len(command):]
+            break
+
+    if not command:
         return "Invalid command. Type 'hello' for assistance."
+
+    if data:
+        data = data.strip().split(" ")
+        return COMMANDS_DICT[command](data)
+    return COMMANDS_DICT[command]()
 
 
 def main():
